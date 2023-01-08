@@ -150,7 +150,7 @@ public class GameLogicNetworked : PunEventHandler
     {
         for (int i = 0; i < 3; i++)
         {
-            deck.DrawNInstantiate(UIHandler);
+            deck.DrawAndInstantiateCard(UIHandler);
         }
     }
 

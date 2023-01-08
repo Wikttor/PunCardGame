@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
 
 public class DeckOfCardsNetworked : NetworkedItem
 {
@@ -60,7 +58,7 @@ public class DeckOfCardsNetworked : NetworkedItem
             tempList.Remove(tempList[cardOrder[i]]);
         }
     }
-    public void DrawNInstantiate(CardSpawner spawner)
+    public void DrawAndInstantiateCard(CardSpawner spawner)
     {
         if(deck.Count > 0)
         {
@@ -72,7 +70,7 @@ public class DeckOfCardsNetworked : NetworkedItem
                 RpcTarget.All, 
                 spawner.punID,
                 cardTypeID);
-        }     
+        }
     }
     [PunRPC]
     public void CardDrawnRPC()
