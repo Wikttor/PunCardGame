@@ -61,7 +61,7 @@ public static class BidCalculator
 
     private static int CalculateBonusValue(List<CardNetworked> cardSet, TestCard mainCard, TestCard checkedCard)
     {
-        int bonusValueInSet = checkedCard.bonus;
+        int bonusValueInSet = checkedCard.bonusValue;
         foreach (CardNetworked card in cardSet)
         {
             if (card.cardScriptableObject.color == mainCard.color && card.cardScriptableObject.mainValue == checkedCard.mainValue + 1)

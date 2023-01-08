@@ -97,7 +97,7 @@ public class CardNetworked : PunEventHandler
         cardScriptableObject = logic.GetComponent<CardIdentifier>().FindByID(cardTypeID);
         this.transform.parent = CardSpawner.instance.spawnParent.transform;
         mainValue.text = cardScriptableObject.mainValue.ToString();
-        bonus.text = cardScriptableObject.bonus.ToString();
+        bonus.text = cardScriptableObject.bonusValue.ToString();
 
         background.colors = FastColorBlock(colorPalet.GetColor((ColorPalet.colorsEnum)cardScriptableObject.color), background);
     }
