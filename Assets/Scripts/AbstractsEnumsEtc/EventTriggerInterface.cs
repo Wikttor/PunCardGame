@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,9 +13,9 @@ public class EventTriggerInterface : EventTrigger
 
     private Dictionary<supportedEvents, Action> eventsDict;
 
-    public  void AddEventTrigger(supportedEvents triggerType, Action action)
+    public void AddEventTrigger(supportedEvents triggerType, Action action)
     {
-        if(eventsDict == null)
+        if (eventsDict == null)
         {
             eventsDict = new Dictionary<supportedEvents, Action>();
         }
@@ -34,10 +33,10 @@ public class EventTriggerInterface : EventTrigger
     public static void AddEventTriggerStatic(supportedEvents triggerType, Action action, GameObject triggeringObject)
     {
         EventTriggerInterface component = triggeringObject.GetComponent<EventTriggerInterface>();
-        if(component == null)
+        if (component == null)
         {
             component = triggeringObject.AddComponent<EventTriggerInterface>();
-        }       
+        }
         component.AddEventTrigger(triggerType, action);
     }
 
