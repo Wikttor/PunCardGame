@@ -798,11 +798,10 @@ MonoBehaviour:
   punID: 0
   view: {fileID: 0}
   isSubmitted: 0
-  colorPalet: {fileID: 11400000, guid: ba662a7abb61cfb4faa68585b0c0c400, type: 2}
+  colorPalette: {fileID: 11400000, guid: ba662a7abb61cfb4faa68585b0c0c400, type: 2}
   mainValue: {fileID: 8063340209207258959}
   bonus: {fileID: 1515349509385385127}
   background: {fileID: 3664802047492158016}
   selectButton: {fileID: 2221356007829895254}
-  cardSO: {fileID: 0}
+  cardScriptableObject: {fileID: 0}
   logic: {fileID: 0}
-  testValue: 
