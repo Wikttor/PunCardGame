@@ -94,7 +94,7 @@ public class CardNetworked : PunEventHandler
     public void InitCardRPC(int spawnerPunId, int cardTypeID)
     {
         logic = GameLogicNetworked.instance;
-        cardScriptableObject = logic.GetComponent<CardIdentifier>().FindWithID(cardTypeID);
+        cardScriptableObject = logic.GetComponent<CardIdentifier>().FindByID(cardTypeID);
         this.transform.parent = CardSpawner.instance.spawnParent.transform;
         mainValue.text = cardScriptableObject.mainValue.ToString();
         bonus.text = cardScriptableObject.bonus.ToString();

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class CardIdentifier : NetworkedItem
 {
@@ -25,7 +23,7 @@ public class CardIdentifier : NetworkedItem
         }
     }
 
-    public TestCard FindWithID(int cardID)
+    public TestCard FindByID(int cardID)
     {
         if (cardID <= cardsRegisteredCount)
         {
@@ -40,7 +38,7 @@ public class CardIdentifier : NetworkedItem
     public int GetID(TestCard card)
     {
         int cardID = -1;
-        cardDict.TryGetValue(card,out cardID);
+        cardDict.TryGetValue(card, out cardID);
         return cardID;
     }
 }
