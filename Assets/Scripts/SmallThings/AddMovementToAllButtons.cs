@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class AddMovementToAllButtons : MonoBehaviour
 {
-    EventTriggerInterface ETInterface;
+    EventTriggerInterface eventTrigger;
     void Start()
     {
-        ETInterface =  this.gameObject.AddComponent<EventTriggerInterface>();
-        ETInterface.AddEventTrigger(EventTriggerInterface.supportedEvents.OnMouseZeroDown, AddIt);
+        eventTrigger = this.gameObject.AddComponent<EventTriggerInterface>();
+        eventTrigger.AddEventTrigger(EventTriggerInterface.supportedEvents.OnMouseZeroDown, AddMovement);
     }
 
-    public void AddIt()
+    public void AddMovement()
     {
         GameObject[] allObjects = SceneManager.GetActiveScene().GetRootGameObjects();
         List<GameObject> listOfObjects = new List<GameObject>();
