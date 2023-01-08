@@ -26,7 +26,7 @@ public class CardNetworked : PunEventHandler
             this.transform.parent = CardSpawner.instance.controlledCardsParent.transform;
         }
     }
-    public ColorPalet colorPalet;
+    public ColorPalette colorPalette;
     public TextMeshProUGUI mainValue, bonus;
     public Button background, selectButton;
     public TestCard cardScriptableObject;
@@ -99,7 +99,7 @@ public class CardNetworked : PunEventHandler
         mainValue.text = cardScriptableObject.mainValue.ToString();
         bonus.text = cardScriptableObject.bonusValue.ToString();
 
-        background.colors = FastColorBlock(colorPalet.GetColor((ColorPalet.colorsEnum)cardScriptableObject.color), background);
+        background.colors = FastColorBlock(colorPalette.GetColor((ColorPalette.colorsEnum)cardScriptableObject.color), background);
     }
     private ColorBlock FastColorBlock(Color color, Button button)
     {
@@ -111,7 +111,7 @@ public class CardNetworked : PunEventHandler
     }
     private void EndOfTurnUpdateSelectUI()
     {
-        ColorPalet.colorsEnum color = isSelected ? ColorPalet.colorsEnum.selected : ColorPalet.colorsEnum.owned;
-        selectButton.colors = FastColorBlock(colorPalet.GetColor(color), selectButton);
+        ColorPalette.colorsEnum color = isSelected ? ColorPalette.colorsEnum.selected : ColorPalette.colorsEnum.owned;
+        selectButton.colors = FastColorBlock(colorPalette.GetColor(color), selectButton);
     }
 }
