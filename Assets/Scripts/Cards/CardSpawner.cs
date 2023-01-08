@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
 public class CardSpawner : NetworkedItem
-{    
+{
     public GameObject cardUIParent;
     public GameObject spawnParent, controlledCardsParent;
     public GameObject triggeringButton;
@@ -14,15 +12,16 @@ public class CardSpawner : NetworkedItem
     public int spawnIterator = 0;
     public static CardSpawner instance;
 
-
     void Start()
     {
         instance = this;
         view = GetComponent<PhotonView>();
         punID = (int)view.ViewID;
-        EventTriggerInterface.AddEventTriggerStatic(EventTriggerInterface.supportedEvents.OnMouseZeroDown,
+        EventTriggerInterface.AddEventTriggerStatic(
+            EventTriggerInterface.supportedEvents.OnMouseZeroDown,
             SpawnCard,
-            triggeringButton);
+            triggeringButton
+        );
     }
     public void SpawnCard()
     {
@@ -36,7 +35,7 @@ public class CardSpawner : NetworkedItem
     public void SetCardsPosition(GameObject cardToReset)
     {
         cardToReset.transform.parent = cardUIParent.transform;
-        cardToReset.transform.position = cardUIParent.transform.position + spawnPositions[spawnIterator];
+        cardToReset.transform.position = cardUIParent.transform.position + spawnPositions[spawnIterator];// TODO this is probably legacy code, functionality duplicated by layout group
         cardToReset.transform.localScale = new Vector3(1, 1, 1);//I dont know what is affecting the scale
         spawnIterator++;
         spawnIterator %= 3;
