@@ -154,9 +154,9 @@ public class GameLogicNetworked : PunEventHandler
         }
     }
 
-    public override void EndOfTurnPunEventHandler(PlayerInfo winner)
+    public override void EndOfTurnPUNEventHandler(PlayerInfo winner)
     {
-        base.EndOfTurnPunEventHandler(winner);
+        base.EndOfTurnPUNEventHandler(winner);
         highestBid = -1;
         localPlayerPotentialBidValue = -1;
         bidCardSet = new List<CardNetworked>();

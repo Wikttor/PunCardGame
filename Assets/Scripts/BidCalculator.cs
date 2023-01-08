@@ -10,7 +10,7 @@ public static class BidCalculator
         foreach (CardNetworked mainCard in cardSet)
         {
 
-            int valueWithMainCard = CalculateMaxBidWithMainCard(cardSet, mainCard.cardSO);
+            int valueWithMainCard = CalculateMaxBidWithMainCard(cardSet, mainCard.cardScriptableObject);
             if (valueWithMainCard > maxbid)
             {
                 maxbid = valueWithMainCard;
@@ -25,7 +25,7 @@ public static class BidCalculator
         List<TestCard> cardSetWithoutMain = new List<TestCard>();
         foreach (CardNetworked card in cardSet)
         {
-            cardSetWithoutMain.Add(card.cardSO);
+            cardSetWithoutMain.Add(card.cardScriptableObject);
         }
         cardSetWithoutMain.Remove(mainCard);
         foreach (TestCard card in cardSetWithoutMain)
@@ -49,8 +49,8 @@ public static class BidCalculator
         {
             if (!isEligible &&
                 card != checkedCard &&
-                card.cardSO.mainValue == checkedCard.mainValue &&
-                card.cardSO.color == mainCard.color
+                card.cardScriptableObject.mainValue == checkedCard.mainValue &&
+                card.cardScriptableObject.color == mainCard.color
                 )
             {
                 isEligible = true;
@@ -64,9 +64,9 @@ public static class BidCalculator
         int bonusValueInSet = checkedCard.bonus;
         foreach (CardNetworked card in cardSet)
         {
-            if (card.cardSO.color == mainCard.color && card.cardSO.mainValue == checkedCard.mainValue + 1)
+            if (card.cardScriptableObject.color == mainCard.color && card.cardScriptableObject.mainValue == checkedCard.mainValue + 1)
             {
-                bonusValueInSet = CalculateBonusValue(cardSet, mainCard, card.cardSO);
+                bonusValueInSet = CalculateBonusValue(cardSet, mainCard, card.cardScriptableObject);
             }
         }
         return bonusValueInSet;

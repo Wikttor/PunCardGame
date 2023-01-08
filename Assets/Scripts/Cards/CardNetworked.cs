@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ExitGames.Client.Photon;
-using Photon.Realtime;
 using Photon.Pun;
 using TMPro;
 using UnityEngine.UI;
@@ -13,10 +9,10 @@ public class CardNetworked : PunEventHandler
     public bool IsSelected
     {
         get { return isSelected; }
-        set 
-        { 
+        set
+        {
             isSelected = value;
-            UpdateSelectUI();
+            EndOfTurnUpdateSelectUI();
         }
     }
     public bool isSubmitted = false;
@@ -24,18 +20,17 @@ public class CardNetworked : PunEventHandler
     public PlayerInfo ControllingPlayer
     {
         get { return controllingPlayer; }
-        set { 
+        set
+        {
             controllingPlayer = value;
             this.transform.parent = CardSpawner.instance.controlledCardsParent.transform;
-            }
+        }
     }
     public ColorPalet colorPalet;
     public TextMeshProUGUI mainValue, bonus;
     public Button background, selectButton;
-    public TestCard cardSO;
+    public TestCard cardScriptableObject;
     public GameLogicNetworked logic;
-
-    public string testValue;
 
     public override void OnEnable()
     {
@@ -43,17 +38,17 @@ public class CardNetworked : PunEventHandler
         this.gameObject.AddComponent<DragableButton>();
     }
 
-    public override void EndOfTurnPunEventHandler(PlayerInfo winner)
+    public override void EndOfTurnPUNEventHandler(PlayerInfo winner)
     {
-        base.EndOfTurnPunEventHandler(winner);
+        base.EndOfTurnPUNEventHandler(winner);
         if (winner == PlayerManager.LocalPlayerInfo && isSubmitted)
         {
-            //PhotonNetwork.Destroy(this.gameObject);
             view.RPC("RPCDestroyCard", RpcTarget.All);
-        }else if(controllingPlayer == null)
+        }
+        else if (controllingPlayer == null)
         {
             ControllingPlayer = winner;
-            UpdateSelectUI();
+            EndOfTurnUpdateSelectUI();
             if (winner != PlayerManager.LocalPlayerInfo)
             {
                 this.gameObject.SetActive(false);
@@ -81,11 +76,11 @@ public class CardNetworked : PunEventHandler
 
     public void Start()
     {
-        EventTriggerInterface ETReference = selectButton.gameObject.AddComponent<EventTriggerInterface>();
-        ETReference.AddEventTrigger(EventTriggerInterface.supportedEvents.OnMouseZeroDown, SelectButtonPressed);
+        EventTriggerInterface EventTrigger = selectButton.gameObject.AddComponent<EventTriggerInterface>();
+        EventTrigger.AddEventTrigger(EventTriggerInterface.supportedEvents.OnMouseZeroDown, OnSelectButtonPressed);
     }
 
-    private void SelectButtonPressed()
+    private void OnSelectButtonPressed()
     {
         if (isSubmitted || ControllingPlayer != PlayerManager.LocalPlayerInfo)
         {
@@ -93,38 +88,30 @@ public class CardNetworked : PunEventHandler
         }
         IsSelected = !IsSelected;
         logic.AddOrRemoveCardFromSet(this, isSelected);
-
     }
 
     [PunRPC]
     public void InitCardRPC(int spawnerPunId, int cardTypeID)
     {
         logic = GameLogicNetworked.instance;
-        cardSO = logic.GetComponent<CardIdentifier>().FindWithID(cardTypeID);
-        //logic.GetComponent<CardSpawner>().SetCardsPosition(this.gameObject);
+        cardScriptableObject = logic.GetComponent<CardIdentifier>().FindWithID(cardTypeID);
         this.transform.parent = CardSpawner.instance.spawnParent.transform;
-        mainValue.text = cardSO.mainValue.ToString();
-        bonus.text = cardSO.bonus.ToString();
+        mainValue.text = cardScriptableObject.mainValue.ToString();
+        bonus.text = cardScriptableObject.bonus.ToString();
 
-        background.colors = FastColorBlock(colorPalet.GetColor((ColorPalet.coloursEnum)cardSO.color), background);
+        background.colors = FastColorBlock(colorPalet.GetColor((ColorPalet.colorsEnum)cardScriptableObject.color), background);
     }
     private ColorBlock FastColorBlock(Color color, Button button)
     {
-        ColorBlock tempColourBlock = button.colors;
-        tempColourBlock.normalColor = color;
-        tempColourBlock.highlightedColor = color;
-        tempColourBlock.selectedColor = color;
-        return tempColourBlock;
+        ColorBlock tempColorBlock = button.colors;
+        tempColorBlock.normalColor = color;
+        tempColorBlock.highlightedColor = color;
+        tempColorBlock.selectedColor = color;
+        return tempColorBlock;
     }
-    private void UpdateSelectUI()
+    private void EndOfTurnUpdateSelectUI()
     {
-        if (isSelected)
-        {
-            selectButton.colors = FastColorBlock(colorPalet.GetColor(ColorPalet.coloursEnum.selected), selectButton);
-        }
-        else
-        {
-            selectButton.colors = FastColorBlock(colorPalet.GetColor(ColorPalet.coloursEnum.owned), selectButton);
-        }
+        ColorPalet.colorsEnum color = isSelected ? ColorPalet.colorsEnum.selected : ColorPalet.colorsEnum.owned;
+        selectButton.colors = FastColorBlock(colorPalet.GetColor(color), selectButton);
     }
 }

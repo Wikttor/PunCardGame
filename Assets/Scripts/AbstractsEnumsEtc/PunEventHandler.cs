@@ -23,11 +23,11 @@ public class PunEventHandler : NetworkedItem, IOnEventCallback
         {
             object[] data = (object[])eventData.CustomData;
             int winnerID = (int)data[0];
-            EndOfTurnPunEventHandler(PhotonView.Find(winnerID).GetComponent<PlayerInfo>());
+            EndOfTurnPUNEventHandler(PhotonView.Find(winnerID).GetComponent<PlayerInfo>());
         }
     }
 
-    public virtual void EndOfTurnPunEventHandler(PlayerInfo winner)
+    public virtual void EndOfTurnPUNEventHandler(PlayerInfo winner)
     {
     }
 }

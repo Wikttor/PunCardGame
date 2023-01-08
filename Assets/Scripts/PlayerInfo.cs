@@ -45,10 +45,10 @@ public class PlayerInfo : PunEventHandler
             this.gameObject);
         gameObject.AddComponent<DragableButton>();
     }
-    public override void EndOfTurnPunEventHandler(PlayerInfo winner)
+    public override void EndOfTurnPUNEventHandler(PlayerInfo winner)
     {
         Messages.DisplayMessage("EoTEventOnPlayerInfoTriggered " + playerName);
-        base.EndOfTurnPunEventHandler(winner);
+        base.EndOfTurnPUNEventHandler(winner);
         bid = 0;
         coinsUsed = 0;
         folded = false;

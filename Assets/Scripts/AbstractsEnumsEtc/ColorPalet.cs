@@ -8,9 +8,9 @@ public class ColorPalet : ScriptableObject
     public Color error = Color.cyan;
     public Color[] colours;
 
-    public enum coloursEnum { white, green, red, black, blue, notOwned, owned, selected, bidSubmitted };
+    public enum colorsEnum { white, green, red, black, blue, notOwned, owned, selected, bidSubmitted };
 
-    public Color GetColor (coloursEnum name)
+    public Color GetColor (colorsEnum name)
     {
         if(colours.Length >= (int)name && colours[(int)name] != null)
         {
