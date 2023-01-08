@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -17,9 +14,9 @@ public class PunEventHandler : NetworkedItem, IOnEventCallback
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    public virtual void OnEvent( EventData eventData)
+    public virtual void OnEvent(EventData eventData)
     {
-        if(eventData.Code == (byte)MyPunEvents.EventCodes.EoT)
+        if (eventData.Code == (byte)MyPunEvents.EventCodes.EoT)
         {
             object[] data = (object[])eventData.CustomData;
             int winnerID = (int)data[0];
