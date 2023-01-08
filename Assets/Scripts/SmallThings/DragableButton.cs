@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class DragableButton : MonoBehaviour
 {
     public List<GameObject> targets;
-    bool initialised = false;
+    bool isInitialised = false;
     public void OnEnable()
     {
-        if (initialised)
+        if (isInitialised)
         {
             return;
         }
-        if(targets == null)
+        if (targets == null)
         {
             targets = new List<GameObject>();
         }
@@ -26,7 +23,7 @@ public class DragableButton : MonoBehaviour
         }
         EventTriggerInterface ETReference = this.gameObject.AddComponent<EventTriggerInterface>();
         ETReference.AddEventTrigger(EventTriggerInterface.supportedEvents.OnMouseOneDown, StartMoving);
-        initialised = true;
+        isInitialised = true;
     }
 
     public void StartMoving()
@@ -37,7 +34,7 @@ public class DragableButton : MonoBehaviour
     IEnumerator KeepMoving()
     {
         Vector3 lastMousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-        Vector3 mouseDelta = new Vector3(0f, 0f, 0f);
+        Vector3 mouseDelta;
         Vector3 newMousePositon;
 
         while (Input.GetMouseButton(1))
@@ -45,7 +42,7 @@ public class DragableButton : MonoBehaviour
             newMousePositon = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
             mouseDelta = newMousePositon - lastMousePosition;
             lastMousePosition = newMousePositon;
-            foreach(GameObject target in targets)
+            foreach (GameObject target in targets)
             {
                 target.transform.Translate(mouseDelta);
             }
