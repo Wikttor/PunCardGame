@@ -1415,7 +1415,6 @@ MonoBehaviour:
   objectsToDisable:
   - {fileID: 669407410}
   - {fileID: 32853201}
-  - {fileID: 0}
 --- !u!114 &732137970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,7 +1461,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 732137969}
         m_TargetAssemblyTypeName: HideUIElements, Assembly-CSharp
-        m_MethodName: DoDisablingOrEnabling
+        m_MethodName: ToggleUIElements
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2198,7 +2197,6 @@ MonoBehaviour:
   objectsToDisable:
   - {fileID: 669407410}
   - {fileID: 32853201}
-  - {fileID: 0}
 --- !u!114 &1055124938
 MonoBehaviour:
   m_ObjectHideFlags: 0
