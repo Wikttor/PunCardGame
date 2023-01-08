@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MyPUNBacis : MonoBehaviourPunCallbacks
+public class MyPUNBasics : MonoBehaviourPunCallbacks
 {
     private const string defaultRoom = "default_room";
     public static bool joinedRoom = false;
@@ -11,20 +10,6 @@ public class MyPUNBacis : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        StartCoroutine(DoublecheckIfJoinedRoom());
-    }
-
-    IEnumerator DoublecheckIfJoinedRoom()
-    {
-        bool isJobDone = false;
-        while (!isJobDone)
-        {
-            if (joinedRoom)
-            {
-                isJobDone = true;
-            }
-            yield return new WaitForSeconds(0.2f);
-        }
     }
 
     public override void OnConnectedToMaster()
@@ -49,7 +34,7 @@ public class MyPUNBacis : MonoBehaviourPunCallbacks
         Messages.PUNCreatedRoom();
     }
 
-    public IEnumerator JoinRoomCreatedByOtherPlayer()
+    public IEnumerator JoinRoomCreatedByOtherPlayer()//TODO replace with a proper callback override
     {
         yield return new WaitForSeconds(3f);
         if (!joinedRoom)
